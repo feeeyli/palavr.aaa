@@ -38,6 +38,7 @@ const App: React.FC = () => {
 	const [slots, setSlots] = useState<string[]>([""]);
 	const slotGroupRef = useRef<ISlotGroupRef>(null);
 	const slotsRef = useRef<HTMLDivElement>(null);
+	const [word, setWord] = useState("teste");
 
 	// useEffect(() => {
 	// 	document.addEventListener("keypress", (e) => {
@@ -46,8 +47,15 @@ const App: React.FC = () => {
 	// }, []);
 
 	useEffect(() => {
+		slotGroupRef.current?.reset();
 		slotsRef.current!.scrollTop = slotsRef.current?.scrollHeight || 0;
 	}, [slots]);
+
+	function reset() {
+		setSlots([""]);
+		slotGroupRef.current?.reset();
+		setWord(prompt("Digite uma palavra:", "teste") || "teste");
+	}
 
 	function handleKey(key: string) {
 		if (key === "<=" || key === "backspace")
@@ -57,6 +65,10 @@ const App: React.FC = () => {
 
 		if (key === "enter") {
 			if (slotGroupRef.current?.value.length === 5) {
+				if (word === slotGroupRef.current?.value) {
+					alert("Ganhou");
+					return reset();
+				}
 				setSlots((oldSlots) => {
 					const newSlots = oldSlots.slice(0, oldSlots.length - 1);
 					return [...newSlots, slotGroupRef.current?.value || "", ""];
@@ -74,7 +86,7 @@ const App: React.FC = () => {
 	return (
 		<Container>
 			<header>
-				<button onClick={() => setSlots([""])}>resetar</button>
+				<button onClick={reset}>resetar</button>
 				<h1>Palavra</h1>
 				<span>tentativas: {slots.length - 1}</span>
 			</header>
