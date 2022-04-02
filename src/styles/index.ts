@@ -6,6 +6,7 @@ type Flex = {
 	align?: Property.AlignItems;
 	justify?: Property.JustifyContent;
 	wrap?: Property.FlexWrap;
+	fullCenter?: boolean;
 };
 
 export const { styled, globalCss } = createStitches({
@@ -26,10 +27,11 @@ export const { styled, globalCss } = createStitches({
 			align = "flex-start",
 			justify = "flex-start",
 			wrap = "nowrap",
+			fullCenter,
 		}: Flex) => ({
 			display: "flex",
-			alignItems: align,
-			justifyContent: justify,
+			alignItems: fullCenter ? "center" : align,
+			justifyContent: fullCenter ? "center" : justify,
 			flexWrap: wrap,
 			flexDirection: dir,
 		}),
