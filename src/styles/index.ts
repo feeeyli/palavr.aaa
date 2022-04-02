@@ -36,6 +36,9 @@ export const { styled, globalCss } = createStitches({
 			flexDirection: dir,
 		}),
 	},
+	media: {
+		bp1: "(max-width: 490px)",
+	},
 });
 
 const globalStyles = globalCss({

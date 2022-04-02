@@ -18,6 +18,12 @@ export const Container = styled("div", {
 		width: "100%",
 		padding: "0 64px",
 
+		"@bp1": {
+			justifyContent: "center",
+			gap: 8,
+			padding: 0,
+		},
+
 		h1: { textTransform: "uppercase", color: "$white" },
 
 		button: {
@@ -51,6 +57,7 @@ export const KeyBoard = styled("div", {
 	"button:last-child": {
 		gridColumnStart: 8,
 		gridColumnEnd: 11,
+		width: "100%",
 	},
 });
 

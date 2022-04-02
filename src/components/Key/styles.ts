@@ -8,6 +8,13 @@ export const Container = styled("button", {
 	outline: 0,
 	fontSize: 28,
 	fontWeight: 600,
-	padding: "12px 14px",
+	// padding: "12px 14px",
 	borderRadius: 4,
+	height: "8.23vw",
+	maxHeight: 64,
+	aspectRatio: 1 / 1,
+
+	"@bp1": {
+		fontSize: 20,
+	},
 });
