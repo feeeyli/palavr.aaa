@@ -20,5 +20,19 @@ export const Container = styled("div", {
 				borderBottomWidth: 12,
 			},
 		},
+		status: {
+			correct: {
+				border: 0,
+				background: "$right",
+			},
+			wrong: {
+				border: 0,
+				background: "$wrong",
+			},
+			place: {
+				border: 0,
+				background: "$place",
+			},
+		},
 	},
 });

@@ -7,10 +7,18 @@ export interface ISlotGroupRef {
 	removeLetter: () => string;
 	value: string;
 	reset: () => void;
+	reveal: (correctWord: string) => void;
 }
 
 const SlotGroup = forwardRef<ISlotGroupRef>(({}, ref) => {
 	const [text, setText] = useState<string>("");
+	const [slots, setSlots] = useState<("" | "correct" | "wrong" | "place")[]>([
+		"",
+		"",
+		"",
+		"",
+		"",
+	]);
 
 	function addLetter(letter: string): string {
 		if (text.length >= 5) return text;
@@ -26,20 +34,34 @@ const SlotGroup = forwardRef<ISlotGroupRef>(({}, ref) => {
 		return text.replace(/\w$/g, "");
 	}
 
+	function reveal(correctWord: string) {
+		const revealedSlots = Array.from(text).map((letter, index) => {
+			if (letter === correctWord[index]) return "correct";
+			if (correctWord.includes(letter)) return "place";
+			if (!correctWord.includes(letter)) return "wrong";
+
+			return "";
+		});
+
+		setSlots(revealedSlots);
+	}
+
 	useImperativeHandle(ref, () => {
 		return {
 			addLetter,
 			removeLetter,
 			value: text,
 			reset: () => setText(""),
+			reveal,
 		};
 	});
 
 	return (
 		<Container>
-			{[0, 1, 2, 3, 4].map((index) => (
+			{slots.map((status, index) => (
 				<Slot
 					value={text[index]}
+					status={status}
 					selected={index === text.length}
 					key={index}
 				/>

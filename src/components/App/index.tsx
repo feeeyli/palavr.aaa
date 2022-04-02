@@ -52,9 +52,11 @@ const App: React.FC = () => {
 	}, [slots]);
 
 	function reset() {
-		setSlots([""]);
+		slotGroupRef.current?.reveal(word);
+		setSlots([]);
 		slotGroupRef.current?.reset();
 		setWord(prompt("Digite uma palavra:", "teste") || "teste");
+		setSlots([""]);
 	}
 
 	function handleKey(key: string) {
@@ -69,6 +71,7 @@ const App: React.FC = () => {
 					alert("Ganhou");
 					return reset();
 				}
+				slotGroupRef.current.reveal(word);
 				setSlots((oldSlots) => {
 					const newSlots = oldSlots.slice(0, oldSlots.length - 1);
 					return [...newSlots, slotGroupRef.current?.value || "", ""];
