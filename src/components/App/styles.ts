@@ -7,6 +7,7 @@ export const Container = styled("div", {
 		justify: "space-between",
 		align: "center",
 	},
+	paddingBottom: 8,
 
 	header: {
 		$flex: {
@@ -14,5 +15,17 @@ export const Container = styled("div", {
 		},
 
 		h1: { textTransform: "uppercase", color: "$white" },
+	},
+});
+
+export const KeyBoard = styled("div", {
+	display: "grid",
+	gridTemplateColumns: "repeat(10, 1fr)",
+	gridAutoRows: "1fr 1fr 1fr",
+	gap: 6,
+
+	"button:last-child": {
+		gridColumnStart: 8,
+		gridColumnEnd: 11,
 	},
 });

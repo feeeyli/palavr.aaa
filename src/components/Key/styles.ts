@@ -8,6 +8,6 @@ export const Container = styled("button", {
 	outline: 0,
 	fontSize: 28,
 	fontWeight: 600,
-	padding: "10px 18px",
+	padding: "12px 14px",
 	borderRadius: 4,
 });
